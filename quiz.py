@@ -48,7 +48,7 @@ You'll be able to see lots of ___3___ and enjoy the clear waters.
 If you're feeling brave, you might try guided ___4___ diving.
 Explore the depths and see hidden treasures and wild sea life not accesible at the surface.
 """
-medium_paragraph_words = ['beach', 'snorkeling', 'fish', 'scooba']
+medium_paragraph_words = ['beach', 'snorkeling', 'fish', 'scuba']
 
 
 #difficulty -----hard-----
@@ -64,7 +64,7 @@ hard_paragraph_words = ['Roberts', 'Ziggy', 'genre', 'Blackstar']
 
 
 
-#variable declaration ------------------------------- START -------------------------------
+"""#variable declaration ------------------------------- START -------------------------------
 current_quiz_location = 1
 #location of the current missing word. It is used to calculate current_missing_word
 #it is also used to end the game. when current_quiz_location == end_quiz_location
@@ -74,7 +74,7 @@ end_quiz_location = 0
 paragraph = ''
 words_list = []
 
-#variable declaration ------------------------------- END -------------------------------
+#variable declaration ------------------------------- END -------------------------------"""
 
 
 #function declaration ------------------------------- START -------------------------------
@@ -104,13 +104,7 @@ def end_location(ent):
 	#this function gets the value for when the game should end
 	return len(ent)
 
-def returnParagraph():
-#this function will return the paragraph corresponding to the diffuculty
-#that the user has chosen. It will also return modified paragraph as
-#user continues to guess the missing words
-	return paragraph
-
-def enterWord():
+def enterWord(current_missing_word):
 #this function will prompt the user to enter a replacement word for the missing word
 #example : Please enter a word for ___1___
 #then it will return a word that the user entered
@@ -124,13 +118,24 @@ def game_engine():
 	paragraph = paragraph_set()
 	words_list = words_list_set()
 	end_quiz_location = end_location(words_list)
+	current_quiz_location = 1
+	current_missing_word = '___' + str(current_quiz_location) + '___'
 	#this sets the value for when the game should end
-	print paragraph
-	#prints out paragraph without any modifications
-	replacement_word = enterWord()
-	#prompts the user to enter the missing word
-	print end_quiz_location
-	print replacement_word
+	while current_quiz_location < end_quiz_location + 1:
+	#while loop will run for the number of words that are missing in the paragraph
+	#for each loop, it should print out a paragraph without the current and later words
+	#but it should include previous words answered
+		print paragraph
+		replacement_word = enterWord(current_missing_word)
+		#prompts the user to enter the missing word
+		if replacement_word == words_list[current_quiz_location - 1]:
+			print ''
+			print 'Correct!'
+			current_quiz_location += 1
+		else:
+			print ''
+			print 'Please try again'
+	return 'You win! Thank you for playing!'
 
 
-game_engine()
+print game_engine()
