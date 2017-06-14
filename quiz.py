@@ -27,13 +27,11 @@ difficulty = onLoad()
 
 
 
-
-
 #difficulty -----easy-----
 easy_paragraph = """
 Butterflies are amazing creatures. Their life cycles has four stages.
 They begin life as an ___1___. The egg hatches and a ___2___ emerges.
-The caterpillar eats for several days until it is ready to make a coccoon.
+The caterpillar eats for several days until it is ready to make a cocoon.
 The caterpillar gestates inside the ___3___ and eventually re-emerges as a beautiful butterlfy.
 The ___4___ will go on to feed and pollinate flowers.
 """
@@ -63,20 +61,6 @@ hard_paragraph_words = ['Roberts', 'Ziggy', 'genre', 'Blackstar']
 
 
 
-
-"""#variable declaration ------------------------------- START -------------------------------
-current_quiz_location = 1
-#location of the current missing word. It is used to calculate current_missing_word
-#it is also used to end the game. when current_quiz_location == end_quiz_location
-#game should end
-current_missing_word = '___' + str(current_quiz_location) + '___'
-end_quiz_location = 0
-paragraph = ''
-words_list = []
-
-#variable declaration ------------------------------- END -------------------------------"""
-
-
 #function declaration ------------------------------- START -------------------------------
 #declaration for functions that will be called by game_engine function
 def paragraph_set():
@@ -99,16 +83,22 @@ def words_list_set():
 	else:
 		return hard_paragraph_words
 
-
-def end_location(ent):
-	#this function gets the value for when the game should end
-	return len(ent)
-
 def enterWord(current_missing_word):
 #this function will prompt the user to enter a replacement word for the missing word
 #example : Please enter a word for ___1___
 #then it will return a word that the user entered
 	return raw_input('Enter a word for ' + current_missing_word + ' ')
+
+"""def replace_word(word1, word2, pgraph):
+	pgraph_split = pgraph.split()
+	replaced = []
+	for lst in pgraph:
+		if word1 in lst:
+			replaced.append(word2)
+		else:
+			replaced.append(lst)
+	return ''.join(replaced) """
+
 
 #function declaration ------------------------------- END -------------------------------
 
@@ -117,7 +107,7 @@ def enterWord(current_missing_word):
 def game_engine():
 	paragraph = paragraph_set()
 	words_list = words_list_set()
-	end_quiz_location = end_location(words_list)
+	end_quiz_location = len(words_list)
 	current_quiz_location = 1
 	current_missing_word = '___' + str(current_quiz_location) + '___'
 	#this sets the value for when the game should end
@@ -126,16 +116,18 @@ def game_engine():
 	#for each loop, it should print out a paragraph without the current and later words
 	#but it should include previous words answered
 		print paragraph
-		replacement_word = enterWord(current_missing_word)
+		replacement_word = enterWord(current_missing_word).lower()
 		#prompts the user to enter the missing word
 		if replacement_word == words_list[current_quiz_location - 1]:
 			print ''
 			print 'Correct!'
+			#paragraph = replace_word(current_missing_word, replacement_word, paragraph)                  FIX THIS
 			current_quiz_location += 1
+			current_missing_word = '___' + str(current_quiz_location) + '___'
 		else:
 			print ''
 			print 'Please try again'
-	return 'You win! Thank you for playing!'
+	return 'You won! Thank you for playing!'
 
 
 print game_engine()
