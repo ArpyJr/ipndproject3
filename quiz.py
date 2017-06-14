@@ -1,3 +1,5 @@
+# ****** Comments are made below the entry that it is describing.
+
 def onLoad():
 #function to run on load. If user input is invalid, then function will run until
 #user enters a valid input; Easy, Medium, or Hard
@@ -31,7 +33,6 @@ The caterpillar eats for several days until it is ready to make a coccoon.
 The caterpillar gestates inside the ___3___ and eventually re-emerges as a beautiful butterlfy.
 The ___4___ will go on to feed and pollinate flowers.
 """
-
 easy_paragraph_words = ['egg', 'caterpillar', 'cocoon', 'butterfly']
 
 
@@ -43,7 +44,6 @@ You'll be able to see lots of ___3___ and enjoy the clear waters.
 If you're feeling brave, you might try guided ___4___ diving.
 Explore the depths and see hidden treasures and wild sea life not accesible at the surface.
 """
-
 medium_paragraph_words = ['beach', 'snorkeling', 'fish', 'scooba']
 
 
@@ -55,9 +55,17 @@ Bowie's first major hallmark was his album 'The Rise and Fall of ___2___ Stardus
 From that point, Bowie continued to reinvent himself and redefine the ___3___ through the ages.
 Bowie was awarded five posthumous awards for his latest album '___4___' after his tragic passing in 2016.
 """
-
 hard_paragraph_words = ['Roberts', 'Ziggy', 'genre', 'Blackstar']
 
-print easy_paragraph
-print medium_paragraph
-print hard_paragraph
+
+def returnParagraph():
+#this function will return the paragraph corresponding to the diffuculty
+#that the user has chosen. It will also return modified paragraph as
+#user continues to guess the missing words.
+	if difficulty == 'easy':
+		return easy_paragraph
+	elif difficulty == 'medium':
+		return medium_paragraph
+	else:
+		return hard_paragraph
+print returnParagraph()
