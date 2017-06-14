@@ -25,6 +25,10 @@ def onLoad():
 difficulty = onLoad()
 #runs onLoad function and stores difficulty in variable 'difficulty'
 
+
+
+
+
 #difficulty -----easy-----
 easy_paragraph = """
 Butterflies are amazing creatures. Their life cycles has four stages.
@@ -58,26 +62,75 @@ Bowie was awarded five posthumous awards for his latest album '___4___' after hi
 hard_paragraph_words = ['Roberts', 'Ziggy', 'genre', 'Blackstar']
 
 
-def returnParagraph():
-#this function will return the paragraph corresponding to the diffuculty
-#that the user has chosen. It will also return modified paragraph as
-#user continues to guess the missing words.
+
+
+#variable declaration ------------------------------- START -------------------------------
+current_quiz_location = 1
+#location of the current missing word. It is used to calculate current_missing_word
+#it is also used to end the game. when current_quiz_location == end_quiz_location
+#game should end
+current_missing_word = '___' + str(current_quiz_location) + '___'
+end_quiz_location = 0
+paragraph = ''
+words_list = []
+
+#variable declaration ------------------------------- END -------------------------------
+
+
+#function declaration ------------------------------- START -------------------------------
+#declaration for functions that will be called by game_engine function
+def paragraph_set():
+#this function sets paragraph so that other functions can
+#refer to those variables and does not require if, elif, or else statements
 	if difficulty == 'easy':
 		return easy_paragraph
 	elif difficulty == 'medium':
 		return medium_paragraph
 	else:
 		return hard_paragraph
-print returnParagraph()
 
-current_quiz_location = 1
-#location of the current missing word. It is used to calculate current_missing_word
-current_missing_word = '___' + str(current_quiz_location) + '___'
+def words_list_set():
+#this function sets words_list so that other functions can
+#refer to those variables and does not require if, elif, or else statements
+	if difficulty == 'easy':
+		return easy_paragraph_words
+	elif difficulty == 'medium':
+		return medium_paragraph_words
+	else:
+		return hard_paragraph_words
 
-print current_missing_word
+
+def end_location(ent):
+	#this function gets the value for when the game should end
+	return len(ent)
+
+def returnParagraph():
+#this function will return the paragraph corresponding to the diffuculty
+#that the user has chosen. It will also return modified paragraph as
+#user continues to guess the missing words
+	return paragraph
 
 def enterWord():
-#this function will prompt the user to enter a replacement word for the missing word.
+#this function will prompt the user to enter a replacement word for the missing word
 #example : Please enter a word for ___1___
-#then it will return a word that the user entered.
-	replacement_word = raw_input('Enter a word for ' + current_missing_word)
+#then it will return a word that the user entered
+	return raw_input('Enter a word for ' + current_missing_word + ' ')
+
+#function declaration ------------------------------- END -------------------------------
+
+
+#game engine -------------------------------START -------------------------------
+def game_engine():
+	paragraph = paragraph_set()
+	words_list = words_list_set()
+	end_quiz_location = end_location(words_list)
+	#this sets the value for when the game should end
+	print paragraph
+	#prints out paragraph without any modifications
+	replacement_word = enterWord()
+	#prompts the user to enter the missing word
+	print end_quiz_location
+	print replacement_word
+
+
+game_engine()
