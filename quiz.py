@@ -69,3 +69,15 @@ def returnParagraph():
 	else:
 		return hard_paragraph
 print returnParagraph()
+
+current_quiz_location = 1
+#location of the current missing word. It is used to calculate current_missing_word
+current_missing_word = '___' + str(current_quiz_location) + '___'
+
+print current_missing_word
+
+def enterWord():
+#this function will prompt the user to enter a replacement word for the missing word.
+#example : Please enter a word for ___1___
+#then it will return a word that the user entered.
+	replacement_word = raw_input('Enter a word for ' + current_missing_word)
