@@ -54,10 +54,13 @@ hard_paragraph = """
 David Bowie is a music icon who has influenced generations of musicians.
 He was born David ___1___ Jones in 1948, and quickly went on to become an influential figure in the music world.
 Bowie's first major hallmark was his album 'The Rise and Fall of ___2___ Stardust and the Spiders From Mars.'
-From that point, Bowie continued to reinvent himself and redefine the ___3___ through the ages.
-Bowie was awarded five posthumous awards for his latest album '___4___' after his tragic passing in 2016.
+From that point, Bowie continued to reinvent himself with characters like ___3___ Sane and the Thin White Duke,
+and redefined the ___4___ through the ages. Bowie was known for his creative flexibility, and for his range of styles, 
+from glam ___5___ to pop and experimental industrial in his 'Tin Machine' period. Bowie was awarded five posthumous 
+awards for his latest album '___6___' after his tragic passing in 2016.
+
 """
-hard_paragraph_words = ['Roberts', 'Ziggy', 'genre', 'Blackstar']
+hard_paragraph_words = ['Robert', 'Ziggy', 'Aladdin', 'genre', 'rock', 'Blackstar']
 
 
 
@@ -89,16 +92,6 @@ def enterWord(current_missing_word):
 #then it will return a word that the user entered
 	return raw_input('Enter a word for ' + current_missing_word + ' ')
 
-"""def replace_word(word1, word2, pgraph):
-	pgraph_split = pgraph.split()
-	replaced = []
-	for lst in pgraph:
-		if word1 in lst:
-			replaced.append(word2)
-		else:
-			replaced.append(lst)
-	return ''.join(replaced) """
-
 
 #function declaration ------------------------------- END -------------------------------
 
@@ -118,15 +111,16 @@ def game_engine():
 		print paragraph
 		replacement_word = enterWord(current_missing_word).lower()
 		#prompts the user to enter the missing word
-		if replacement_word == words_list[current_quiz_location - 1]:
+		if replacement_word == words_list[current_quiz_location - 1].lower():
 			print ''
 			print 'Correct!'
-			#paragraph = replace_word(current_missing_word, replacement_word, paragraph)                  FIX THIS
+			paragraph = paragraph.replace(current_missing_word, words_list[current_quiz_location - 1])
 			current_quiz_location += 1
 			current_missing_word = '___' + str(current_quiz_location) + '___'
 		else:
 			print ''
 			print 'Please try again'
+	print paragraph
 	return 'You won! Thank you for playing!'
 
 
