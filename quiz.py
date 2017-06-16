@@ -91,8 +91,6 @@ def enterWord(current_missing_word):
 #example : Please enter a word for ___1___
 #then it will return a word that the user entered
 	return raw_input('Enter a word for ' + current_missing_word + ' ')
-
-
 #function declaration ------------------------------- END -------------------------------
 
 
@@ -114,6 +112,12 @@ def game_engine():
 		if replacement_word == words_list[current_quiz_location - 1].lower():
 			print ''
 			print 'Correct!'
+			paragraph = paragraph.replace(current_missing_word, words_list[current_quiz_location - 1])
+			current_quiz_location += 1
+			current_missing_word = '___' + str(current_quiz_location) + '___'
+		elif replacement_word == 'skip':
+			print ''
+			print 'You chose to skip! the answer is ' + words_list[current_quiz_location - 1]
 			paragraph = paragraph.replace(current_missing_word, words_list[current_quiz_location - 1])
 			current_quiz_location += 1
 			current_missing_word = '___' + str(current_quiz_location) + '___'
